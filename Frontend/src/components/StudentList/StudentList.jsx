@@ -93,7 +93,11 @@ const StudentList = () => {
             </div>
           ) : (
             students.map((student) => (
-              <StudentCard key={student._id} student={student} />
+              <StudentCard
+                key={student._id}
+                student={student}
+                isEditable={false}
+              />
             ))
           )}
         </div>
