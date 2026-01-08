@@ -17,7 +17,14 @@ const StudentDashboard = lazy(() =>
 const AppRoutes = () => {
   return (
     <>
-      <Suspense fallback={<p>Loading page...</p>}>
+      <Suspense
+        fallback={
+          <div className="suspense-container">
+            <div className="spinner"></div>
+            <p>Loading experience...</p>
+          </div>
+        }
+      >
         <Routes>
           <Route
             path="/"
