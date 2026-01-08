@@ -1,0 +1,130 @@
+/* Page background */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Form card */
+.login-form {
+  background: #ffffff;
+  padding: 2rem;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Heading */
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+/* Regular inputs */
+.login-form input[type="email"] {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.login-form input[type="email"]:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+/* Password container - matches email input styling */
+.password-input-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.password-input-container:focus-within {
+  border-color: #667eea;
+}
+
+/* Password input inside container */
+.password-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  background: transparent;
+  min-width: 0;
+}
+
+/* Toggle button - FIXED VERSION */
+.password-toggle-btn {
+  background: none;
+  border: none;
+  color: #667eea;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  margin-left: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+  width: 40px;
+  text-align: right;
+  line-height: 1;
+}
+
+.password-toggle-btn:hover {
+  text-decoration: underline;
+  color: #5a67d8;
+}
+
+.password-toggle-btn:focus {
+  outline: none;
+}
+
+/* Submit button */
+.login-form button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background: #667eea;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-form button[type="submit"]:hover {
+  background: #5a67d8;
+}
+
+/* Signup link */
+.login-form .link {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 14px;
+}
+
+.login-form .link a {
+  color: #667eea;
+  text-decoration: none;
+}
+
+.login-form .link a:hover {
+  text-decoration: underline;
+}

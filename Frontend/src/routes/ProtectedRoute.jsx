@@ -4,7 +4,7 @@ function ProtectedRoute({ children, allowedRole }) {
   const token = localStorage.getItem("token");
   const userRole = localStorage.getItem("role");
 
-  if (!token) return <Navigate to="/login" />;
+  if (!token || !userRole) return <Navigate to="/login" />;
 
   // If a specific role is required and doesn't match
   if (allowedRole && userRole !== allowedRole) {

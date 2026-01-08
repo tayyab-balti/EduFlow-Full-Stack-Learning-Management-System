@@ -1,0 +1,104 @@
+/* Container to center the form if it's on its own page, 
+   otherwise, it will just fill its parent dashboard slot */
+.student-form {
+  background: #ffffff;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 450px;
+  margin: 2rem auto;
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.student-form h3 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #2d3748;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.student-form input[type="text"],
+.student-form input[type="email"],
+.student-form select {
+  width: 100%; /* Consistent width */
+  box-sizing: border-box; /* Ensures padding doesn't break width */
+  padding: 12px 15px;
+  margin-bottom: 1.2rem;
+  border-radius: 6px;
+  border: 1.5px solid #e2e8f0;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  background-color: #f8fafc;
+}
+
+.student-form input:focus,
+.student-form select:focus {
+  outline: none;
+  border-color: #667eea;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Subjects Selection Area */
+.subjects-selection {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #f1f5f9;
+  border-radius: 8px;
+}
+
+.subjects-selection p {
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+  color: #4a5568;
+  font-size: 14px;
+}
+
+.subjects-selection label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #2d3748;
+  transition: color 0.2s;
+}
+
+.subjects-selection label:hover {
+  color: #667eea;
+}
+
+.subjects-selection input[type="checkbox"] {
+  margin-right: 12px;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #667eea; /* Modern browsers support this for easy coloring */
+}
+
+/* Submit Button */
+.student-form button[type="submit"] {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 1rem;
+}
+
+.student-form button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.student-form button:active {
+  transform: translateY(0);
+}

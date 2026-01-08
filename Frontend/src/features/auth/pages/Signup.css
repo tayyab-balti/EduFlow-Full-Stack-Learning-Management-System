@@ -1,0 +1,115 @@
+/* Page background */
+.signup-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #43cea2, #185a9d);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Form card */
+.signup-form {
+  background: #ffffff;
+  padding: 2rem;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Heading */
+.signup-form h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+/* Regular inputs (name and email) */
+.signup-form input[type="text"],
+.signup-form input[type="email"],
+.password-input-container {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+  display: flex; /* Keeps input and button on one line */
+  align-items: center;
+  background: white;
+}
+
+.signup-form input[type="text"]:focus,
+.signup-form input[type="email"]:focus {
+  outline: none;
+  border-color: #43cea2;
+}
+
+.password-input-container:focus-within {
+  border-color: #43cea2;
+}
+
+/* Remove default styling from the actual password input */
+.password-input {
+  flex: 1; /* Takes up all available space */
+  border: none !important; 
+  outline: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-size: 14px;
+  background: transparent;
+}
+
+/* Style the Show/Hide button */
+.password-toggle-btn {
+  background: none;
+  border: none;
+  color: #185a9d;
+  cursor: pointer;
+  font-size: 12px;
+  padding-left: 10px;
+}
+
+.password-toggle-btn:hover {
+  text-decoration: underline;
+  color: #36b58f;
+}
+
+.password-toggle-btn:focus {
+  outline: none;
+}
+
+/* Submit button */
+.signup-form button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background: #43cea2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.signup-form button[type="submit"]:hover {
+  background: #36b58f;
+}
+
+/* Login link */
+.signup-form .link {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 14px;
+}
+
+.signup-form .link a {
+  color: #185a9d;
+  text-decoration: none;
+}
+
+.signup-form .link a:hover {
+  text-decoration: underline;
+}

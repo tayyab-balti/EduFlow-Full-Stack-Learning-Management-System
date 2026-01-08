@@ -5,13 +5,14 @@ const PublicRoute = ({ children }) => {
   const role = localStorage.getItem("role");
 
   if (token) {
+    let redirectPath = "/student-dashboard";
+
     // Check role to decide where to send the logged-in user
-    return (
-      <Navigate
-        to={role === "teacher" ? "/dashboard" : "/student-dashboard"}
-        replace
-      />
-    );
+
+    if (role === "admin") redirectPath = "/admin-dashboard";
+    else if (role === "teacher") redirectPath = "/dashboard";
+
+    return <Navigate to={redirectPath} replace />;
   }
 
   return children;

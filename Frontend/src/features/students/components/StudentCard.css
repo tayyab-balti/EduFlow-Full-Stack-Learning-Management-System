@@ -1,0 +1,186 @@
+.student-card {
+  flex: 0 0 320px;
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #f1f5f9;
+}
+
+.student-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* ================= Header ================= */
+.card-header {
+  padding: 30px 20px 10px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Crucial for horizontal centering */
+  text-align: center;
+}
+
+/* ================= Avatar ================= */
+.avatar-large {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid #f8fafc;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin-bottom: 15px;
+  overflow: hidden;
+  position: relative;
+}
+
+.avatar-large.editable {
+  cursor: pointer;
+}
+
+.avatar-large.editable:hover .overlay {
+  opacity: 1;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* ================= Student Info ================= */
+.student-info-centered h4 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.student-email {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 4px 0 12px 0;
+}
+
+/* Department */
+.department-badge-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centers label and value together */
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.dept-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dept-value {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4f46e5;
+  background: #f0f4ff;
+  padding: 3px 12px;
+  border-radius: 20px;
+}
+
+/* ================= Body ================= */
+.card-body {
+  padding: 0 25px 20px 25px;
+}
+
+.section-title {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Subject Tags Centering */
+.subject-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center; /* Optional: centers the tags too */
+}
+
+.tag {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* ================= Upload Actions ================= */
+.upload-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 25px;
+}
+
+.save-btn,
+.cancel-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.save-btn {
+  background: #10b981;
+  color: #ffffff;
+}
+
+.cancel-btn {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+/* ================= Footer ================= */
+.card-footer {
+  padding: 0 20px 20px 20px;
+}
+
+.view-btn {
+  width: 100%;
+  padding: 12px;
+  background: #4f46e5;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.view-btn:hover {
+  background: #4338ca;
+}
