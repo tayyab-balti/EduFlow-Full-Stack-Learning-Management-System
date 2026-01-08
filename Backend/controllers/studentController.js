@@ -10,7 +10,7 @@ exports.inviteStudent = async (req, res, next) => {
     const teacherId = req.user.id;
     const teacherName = req.user.name;
 
-    if (!name || !email || !departmentId || subjectIds.length === 0) {
+    if (!name || !email || !departmentId || !Array.isArray(subjectIds) || subjectIds.length === 0) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
@@ -117,3 +117,55 @@ exports.getMyStudents = async (req, res) => {
     res.status(500).json({ message: "Error fetching students", error: err.message });
   }
 };
+
+exports.getMyProfile = async (req, res) => {
+  try {
+    const Student = require("../models/Student");
+    const student = await Student.findById(req.user.id);
+    res.json(student);
+  } catch (err) {
+    res.status(500).json({ message: "Server error" });
+  }
+}
+
+
+exports.updateStudentProfile  = async (req, res) => {
+    try {
+        if (!req.file) return res.status(400).json({ message: "No file uploaded" });
+
+        // IMPORTANT: If you don't have auth middleware yet, req.user is undefined.
+        // For now, let's assume you're sending the studentId in the formData or via auth.
+        // If using auth middleware, it should be app.post('...', protect, upload.single...)
+        const studentId = req.user.id; 
+
+        if (!studentId) {
+            return res.status(400).json({ message: "User ID is missing" });
+        }
+
+        const filePath = req.file.path.replace(/\\/g, "/");
+
+        const updatedStudent = await Student.findByIdAndUpdate(
+            studentId, 
+            { $set: { profileImage: filePath } }, // Use $set to be explicit
+            { new: true, runValidators: true } 
+        );
+
+        if (!updatedStudent) {
+            return res.status(404).json({ message: "Student not found" });
+        }
+
+        // Ensure student can update only their own profile:
+        if (updatedStudent._id.toString() !== req.user.id) {
+          return res.status(403).json({ message: "Unauthorized" });
+        }
+
+
+        // console.log("Updated Student:", updatedStudent);
+
+        res.json(updatedStudent); // Return the full updated object
+
+    } catch (err) {
+        console.error("Database Error:", err); // This helps you see the REAL error in your terminal
+        res.status(500).json({ message: "Server error", error: err.message });
+    }
+}
