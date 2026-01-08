@@ -6,13 +6,14 @@ function ProtectedRoute({ children, allowedRole }) {
 
   if (!token) return <Navigate to="/login" />;
 
-  // If a specific role is required and doesn't match, send them home
+  // If a specific role is required and doesn't match
   if (allowedRole && userRole !== allowedRole) {
-    return (
-      <Navigate
-        to={userRole === "teacher" ? "/dashboard" : "/student-dashboard"}
-      />
-    );
+    let redirectPath = "/student-dashboard"; // Default fallback
+
+    if (userRole === "admin") redirectPath = "/admin-dashboard";
+    else if (userRole === "teacher") redirectPath = "/dashboard";
+
+    return <Navigate to={redirectPath} replace />;
   }
 
   return children;

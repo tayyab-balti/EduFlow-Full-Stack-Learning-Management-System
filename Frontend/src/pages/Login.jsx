@@ -37,17 +37,28 @@ function Login() {
       return toast.error("Please enter a valid email address");
     }
 
+    // Inside Login.jsx -> handleLogin function
+
     try {
       const response = await api.post("/auth/login", credentials);
 
+      // Store data
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("role", response.data.user.role);
       localStorage.setItem("userName", response.data.user.name);
 
       toast.success(response.data.message || "Login successful");
 
-      if (response.data.user.role === "teacher") navigate("/dashboard");
-      else navigate("/student-dashboard");
+      // Multi-role Navigation Logic
+      const role = response.data.user.role;
+
+      if (role === "admin") {
+        navigate("/admin-dashboard"); // Make sure this route exists in App.jsx
+      } else if (role === "teacher") {
+        navigate("/dashboard");
+      } else {
+        navigate("/student-dashboard");
+      }
     } catch (error) {
       toast.error(error.response?.data?.message || "Invalid credentials");
       setCredentials({ email: "", password: "" });
