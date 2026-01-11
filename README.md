@@ -21,3 +21,21 @@ This project contains both the frontend and backend for the Learning Management 
 1. `cd frontend`
 2. `npm install`
 3. `npm start`
+
+### 3. Project Architecture
+
+LMS Project
+├── Backend (Node.js + Express API)
+│   ├── config/          # Database & configuration
+│   ├── controllers/     # Business logic
+│   ├── middleware/      # Authentication, Authorization, Error handling
+│   ├── models/          # Database schemas (MongoDB)
+│   ├── routes/          # API endpoints
+│   ├── uploads/         # File storage
+│   └── utils/           # Helper functions
+│
+└── Frontend (React + Vite)
+    ├── components/      # Reusable UI components
+    ├── features/        # Feature-based organization
+    ├── routes/          # Routing logic
+    └── services/        # API calls
