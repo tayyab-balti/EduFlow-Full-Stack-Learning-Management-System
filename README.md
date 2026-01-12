@@ -1,6 +1,6 @@
 # LMS Project
 
-This project contains both the frontend and backend for the Learning Management System.
+It's a full-featured LMS with authentication, authorization, file uploads, and role-based access control
 
 ## Project Structure
 
@@ -24,7 +24,8 @@ This project contains both the frontend and backend for the Learning Management 
 
 ### 3. Project Architecture
 
-LMS Project
+**LMS Project:**
+```
 ├── Backend (Node.js + Express API)
 │   ├── config/          # Database & configuration
 │   ├── controllers/     # Business logic
@@ -39,3 +40,21 @@ LMS Project
     ├── features/        # Feature-based organization
     ├── routes/          # Routing logic
     └── services/        # API calls
+```
+
+### 4. Features (`features/`)
+
+**Feature-Based Organization:**
+```
+features/
+├── auth/
+│   └── pages/ (Login, Signup, Home)
+├── students/
+│   ├── components/ (StudentCard, StudentForm, StudentList)
+│   └── pages/ (StudentDashboard)
+├── teachers/
+│   └── pages/ (TeacherDashboard)
+└── admin/
+    └── pages/ (AdminDashboard)
+```
+
