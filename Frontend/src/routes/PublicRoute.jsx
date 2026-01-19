@@ -10,7 +10,7 @@ const PublicRoute = ({ children }) => {
     // Check role to decide where to send the logged-in user
 
     if (role === "admin") redirectPath = "/admin-dashboard";
-    else if (role === "teacher") redirectPath = "/dashboard";
+    else if (role === "teacher") redirectPath = "/teacher-dashboard";
 
     return <Navigate to={redirectPath} replace />;
   }

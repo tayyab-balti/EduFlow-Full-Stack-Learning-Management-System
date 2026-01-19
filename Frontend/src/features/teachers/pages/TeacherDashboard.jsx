@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AddStudentForm from "../../students/components/StudentForm";
+import StudentForm from "../../students/components/StudentForm";
 import StudentList from "../../students/components/StudentList";
 import "./TeacherDashboard.css";
 import Navbar from "../../../components/layout/Navbar";
@@ -12,6 +12,7 @@ function TeacherDashboard() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
+    // localStorage.clear()
     navigate("/login");
   };
 
@@ -25,12 +26,14 @@ function TeacherDashboard() {
             className={`toggle-form-btn ${showForm ? "close-btn" : "add-btn"}`}
             onClick={() => setShowForm(!showForm)}
           >
-            <span className="btn-icon">{showForm ? "✕ " : "＋ "}</span>
-            {showForm ? "Cancel" : "Add New Student"}
+            <span className="btn-icon">
+              {showForm ? "✕ Cancel" : "＋ Add New Student"}
+            </span>
+            {/* {showForm ? "Cancel" : "Add New Student"} */}
           </button>
 
           {showForm && (
-            <AddStudentForm onStudentAdded={() => setShowForm(false)} />
+            <StudentForm onStudentAdded={() => setShowForm(false)} />
           )}
 
           {!showForm && <StudentList />}

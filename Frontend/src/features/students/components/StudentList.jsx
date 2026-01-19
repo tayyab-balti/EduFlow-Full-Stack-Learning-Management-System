@@ -11,12 +11,12 @@ const StudentList = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // This handles the debounce
+    // To avoid calling the API on every keystroke while typing (debounce).
     const delayDebounceFn = setTimeout(() => {
       loadStudents();
     }, 500);
 
-    return () => clearTimeout(delayDebounceFn);
+    return () => clearTimeout(delayDebounceFn); // cleanup function
   }, [query, currentPage]);
 
   const loadStudents = async () => {
@@ -34,7 +34,7 @@ const StudentList = () => {
         setStudents(response.data.students);
         setTotalPages(response.data.pagination.totalPages || 1);
 
-        // Safety check: If backend says we are on page 1 but our state is different
+        // (Safety check) Prevents UI/backend mismatch: If backend says we are on page 1 but our state is different
         if (response.data.pagination.currentPage !== currentPage) {
           setCurrentPage(response.data.pagination.currentPage);
         }

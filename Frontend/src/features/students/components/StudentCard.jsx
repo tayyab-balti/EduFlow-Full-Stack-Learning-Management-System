@@ -2,39 +2,41 @@ import { useState, useRef } from "react";
 import api from "../../../services/api";
 import "./StudentCard.css";
 import { toast } from "react-toastify";
+import LoadingButton from "../../../components/ui/LoadingButton";
 
 const StudentCard = ({ student, isEditable = false, onUploadSuccess }) => {
-  const [preview, setPreview] = useState(null);
-  const [selectedFile, setSelectedFile] = useState(null);
-  const fileInputRef = useRef(null);
+  const [preview, setPreview] = useState(null); // Instant image feedback
+  const [selectedFile, setSelectedFile] = useState(null); // Upload payload
+  const [isUpdating, setIsUpdating] = useState(false); // Prevent double upload
+  const fileInputRef = useRef(null); // Trigger file input
 
   // Construct URL with a fallback to the backend's default-avatar image
   const imageUrl = student.profileImage
     ? `http://localhost:7000/${student.profileImage.replace(/\\/g, "/")}`
     : `http://localhost:7000/uploads/default-avatar.png`;
 
-  // Updated fallback: if student has no image, use a UI placeholder or your local default
-  const defaultImage =
-    "https://ui-avatars.com/api/?name=" + student.name + "&background=random";
-
   const handleImageClick = () => {
-    if (isEditable) fileInputRef.current.click();
+    if (isEditable) fileInputRef.current.click(); // custom UI image click
   };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       setSelectedFile(file);
-      setPreview(URL.createObjectURL(file)); // Show local preview immediately
+      setPreview(URL.createObjectURL(file)); // Shows image before upload
     }
   };
 
   const handleSave = async () => {
-    if (!selectedFile) return;
+    // Prevent execution if already loading or no file
+    if (!selectedFile || isUpdating) return;
 
-    const formData = new FormData();
+    const formData = new FormData(); // File uploads require multipart/form-data
     formData.append("avatar", selectedFile);
     formData.append("studentId", student._id); // <--- Send the ID explicitly
+
+    // Set loading to true immediately
+    setIsUpdating(true);
 
     try {
       const response = await api.post("/students/update-profile", formData, {
@@ -54,10 +56,15 @@ const StudentCard = ({ student, isEditable = false, onUploadSuccess }) => {
     } catch (err) {
       console.error(err);
       toast.error(err.response?.data?.message || "Upload failed");
+    } finally {
+      // Always reset loading state so the button can be used again if it failed
+      setIsUpdating(false);
     }
   };
 
-  const initials = student.name?.charAt(0).toUpperCase() || "?";
+  const handleImageError = (e) => {
+    e.target.src = "http://localhost:7000/uploads/default-avatar.png";
+  };
 
   return (
     <div className="student-card">
@@ -74,7 +81,12 @@ const StudentCard = ({ student, isEditable = false, onUploadSuccess }) => {
           className={`avatar-large ${isEditable ? "editable" : ""}`}
           onClick={handleImageClick}
         >
-          <img src={preview || imageUrl} alt="profile" className="avatar-img" />
+          <img
+            src={preview || imageUrl}
+            alt="profile"
+            className="avatar-img"
+            onError={handleImageError}
+          />
           {isEditable && <div className="overlay">Change Photo</div>}
         </div>
 
@@ -103,11 +115,17 @@ const StudentCard = ({ student, isEditable = false, onUploadSuccess }) => {
 
       {selectedFile && isEditable && (
         <div className="upload-actions">
-          <button className="save-btn" onClick={handleSave}>
+          <LoadingButton
+            className="save-btn"
+            onClick={handleSave}
+            isLoading={isUpdating}
+          >
             Save
-          </button>
+          </LoadingButton>
+
           <button
             className="cancel-btn"
+            disabled={isUpdating}
             onClick={() => {
               setPreview(null);
               setSelectedFile(null);

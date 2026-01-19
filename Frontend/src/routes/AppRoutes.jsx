@@ -1,18 +1,16 @@
-import { lazy, Suspense } from "react";
+import { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import PublicRoute from "./PublicRoute";
 import ProtectedRoute from "./ProtectedRoute";
-import AdminDashboard from "../features/admin/pages/AdminDashboard";
 
-const Home = lazy(() => import("../features/auth/pages/Home"));
-const Signup = lazy(() => import("..//features/auth/pages/Signup"));
-const Login = lazy(() => import("../features/auth/pages/Login"));
-const TeacherDashboard = lazy(() =>
-  import("../features/teachers/pages/TeacherDashboard")
-);
-const StudentDashboard = lazy(() =>
-  import("../features/students/pages/StudentDashboard")
-);
+import {
+  Home,
+  Signup,
+  Login,
+  TeacherDashboard,
+  StudentDashboard,
+  AdminDashboard,
+} from "./lazyRoutes";
 
 const AppRoutes = () => {
   return (
@@ -54,7 +52,7 @@ const AppRoutes = () => {
           />
 
           <Route
-            path="/dashboard"
+            path="/teacher-dashboard"
             element={
               <ProtectedRoute allowedRole="teacher">
                 <TeacherDashboard />

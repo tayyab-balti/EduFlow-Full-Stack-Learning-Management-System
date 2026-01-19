@@ -11,7 +11,7 @@ function ProtectedRoute({ children, allowedRole }) {
     let redirectPath = "/student-dashboard"; // Default fallback
 
     if (userRole === "admin") redirectPath = "/admin-dashboard";
-    else if (userRole === "teacher") redirectPath = "/dashboard";
+    else if (userRole === "teacher") redirectPath = "/teacher-dashboard";
 
     return <Navigate to={redirectPath} replace />;
   }

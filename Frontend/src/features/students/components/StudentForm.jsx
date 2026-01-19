@@ -2,8 +2,9 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import api from "../../../services/api";
 import "./StudentForm.css";
+import LoadingButton from "../../../components/ui/LoadingButton";
 
-function AddStudentForm({ onStudentAdded }) {
+function StudentForm({ onStudentAdded }) {
   const [studentCredentials, setStudentCredentials] = useState({
     name: "",
     email: "",
@@ -19,6 +20,8 @@ function AddStudentForm({ onStudentAdded }) {
     "Machine Learning",
   ];
 
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     setStudentCredentials({
       ...studentCredentials,
@@ -29,6 +32,8 @@ function AddStudentForm({ onStudentAdded }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (loading) return; // prevent multiple clicks
+
     const { name, email, departmentId, subjectIds } = studentCredentials;
 
     if (!name || !email || !departmentId || !subjectIds) {
@@ -38,11 +43,12 @@ function AddStudentForm({ onStudentAdded }) {
     }
 
     try {
+      setLoading(true);
       const response = await api.post("/students/invite", studentCredentials);
 
       toast.success(response?.data?.message || "Student invited successfully");
 
-      // send student back to parent (Dashboard) and close form
+      // send student back to parent (Dashboard) and close form ()
       if (onStudentAdded) {
         onStudentAdded({
           ...studentCredentials,
@@ -59,6 +65,8 @@ function AddStudentForm({ onStudentAdded }) {
       });
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
+    } finally {
+      setLoading(false); // stop loading
     }
   };
 
@@ -116,10 +124,12 @@ function AddStudentForm({ onStudentAdded }) {
             </label>
           ))}
         </div>
-        <button type="submit">Invite Student</button>
+        <LoadingButton type="submit" isLoading={loading}>
+          Invite Student
+        </LoadingButton>
       </form>
     </>
   );
 }
 
-export default AddStudentForm;
+export default StudentForm;

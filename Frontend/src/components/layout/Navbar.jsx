@@ -14,7 +14,9 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="nav-logo">
-        <Link to={role === "teacher" ? "/dashboard" : "/student-dashboard"}>
+        <Link
+          to={role === "teacher" ? "/teacher-dashboard" : "/student-dashboard"}
+        >
           LMS Portal
         </Link>
       </div>

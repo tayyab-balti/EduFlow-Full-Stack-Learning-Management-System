@@ -45,6 +45,14 @@ const studentSchema = new mongoose.Schema(
     profileImage: {
       type: String,
       default: "uploads/default-avatar.png"
+    },
+    isPendingDelete: {
+      type: Boolean,
+      default: false
+    },
+    scheduledDeleteAt: {
+      type: Date,
+      default: null
     }
   },
   { timestamps: true }

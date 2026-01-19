@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../../../services/api";
 import { toast } from "react-toastify";
+import LoadingButton from "../../../components/ui/LoadingButton";
 
 function Signup() {
   const navigate = useNavigate();
@@ -17,6 +18,8 @@ function Signup() {
 
   const [showPasswordBtn, setShowPasswordBtn] = useState(false);
   const [showConfirmPasswordBtn, setShowConfirmPasswordBtn] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,10 +42,17 @@ function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    const name = teacher.name.trim();
+    if (isLoading) return; // Never allow duplicate API calls
+
+    const name = teacher.name
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ")
+      .trim();
     const email = teacher.email.trim().toLowerCase();
     const password = teacher.password;
     const confirmPassword = teacher.confirmPassword;
+
     const nameRegex = /^[A-Za-z ]+$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&]).+$/;
@@ -77,6 +87,9 @@ function Signup() {
       return toast.error("Passwords do not match");
     }
 
+    // start loading ONLY before  API call
+    setIsLoading(true);
+
     try {
       const response = await api.post("/auth/signup", {
         name,
@@ -96,10 +109,10 @@ function Signup() {
 
       navigate("/login");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Signup failed");
-      return;
+      return toast.error(error.response?.data?.message || "Signup failed");
+    } finally {
+      setIsLoading(false); // ALWAYS stop loading
     }
-
     // console.log("Signup Data:", teacher);
   };
 
@@ -108,64 +121,68 @@ function Signup() {
       <form className="signup-form" onSubmit={handleSignup}>
         <h2>Signup</h2>
 
-        <input
-          name="name"
-          type="text"
-          placeholder="Full Name"
-          value={teacher.name}
-          onChange={handleChange}
-        />
-
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          value={teacher.email}
-          onChange={handleChange}
-        />
-
-        <div className="password-input-container">
+        <fieldset disabled={isLoading}>
           <input
-            className="password-input"
-            name="password"
-            type={showPassword ? "text" : "password"}
-            placeholder="Password"
-            value={teacher.password}
+            name="name"
+            type="text"
+            placeholder="Full Name"
+            value={teacher.name}
             onChange={handleChange}
           />
 
-          {showPasswordBtn && (
-            <button
-              type="button"
-              className="password-toggle-btn"
-              onClick={() => setShowPassword((prev) => !prev)}
-            >
-              {showPassword ? "Hide" : "Show"}
-            </button>
-          )}
-        </div>
-
-        <div className="password-input-container">
           <input
-            className="password-input"
-            name="confirmPassword"
-            type={showConfirmPassword ? "text" : "password"}
-            placeholder="Confirm Password"
-            value={teacher.confirmPassword}
+            name="email"
+            type="email"
+            placeholder="Email"
+            value={teacher.email}
             onChange={handleChange}
           />
-          {showConfirmPasswordBtn && (
-            <button
-              type="button"
-              className="password-toggle-btn"
-              onClick={() => setShowConfirmPassword((prev) => !prev)}
-            >
-              {showConfirmPassword ? "Hide" : "Show"}
-            </button>
-          )}
-        </div>
 
-        <button type="submit">Signup</button>
+          <div className="password-input-container">
+            <input
+              className="password-input"
+              name="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              value={teacher.password}
+              onChange={handleChange}
+            />
+
+            {showPasswordBtn && (
+              <button
+                type="button"
+                className="password-toggle-btn"
+                onClick={() => setShowPassword((prev) => !prev)}
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            )}
+          </div>
+
+          <div className="password-input-container">
+            <input
+              className="password-input"
+              name="confirmPassword"
+              type={showConfirmPassword ? "text" : "password"}
+              placeholder="Confirm Password"
+              value={teacher.confirmPassword}
+              onChange={handleChange}
+            />
+            {showConfirmPasswordBtn && (
+              <button
+                type="button"
+                className="password-toggle-btn"
+                onClick={() => setShowConfirmPassword((prev) => !prev)}
+              >
+                {showConfirmPassword ? "Hide" : "Show"}
+              </button>
+            )}
+          </div>
+
+          <LoadingButton type="submit" isLoading={isLoading}>
+            Signup
+          </LoadingButton>
+        </fieldset>
 
         <div className="link">
           Already have an account? <Link to="/login">Login</Link>
