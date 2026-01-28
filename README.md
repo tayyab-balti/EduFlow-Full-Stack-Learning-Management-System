@@ -1,60 +1,180 @@
-# LMS Project
+# 🎓 EduFlow – Full Stack Learning Management System (MERN)
 
-It's a full-featured LMS with authentication, authorization, file uploads, and role-based access control
+EduFlow is a **full-stack Learning Management System (LMS)** built using the **MERN stack**.  
+It supports **role-based authentication**, **email automation**, **dashboard management**, and **secure user handling** for Admins, Teachers, and Students.
 
-## Project Structure
+This project was developed as part of my **6-month MERN Stack training** to demonstrate real-world full-stack application architecture and workflows.
 
-- **/frontend**: React/ client side.
-- **/backend**: Node.js/Express API.
+---
 
-## Getting Started
+## 🚀 Live Features Overview
 
-### 1. Backend Setup
+### 👤 User Roles
+- Admin  
+- Teacher  
+- Student  
 
-1. `cd backend`
-2. `npm install`
-3. Create a `.env` file
-4. `npm start`
+Each role has dedicated permissions and dashboards.
 
-### 2. Frontend Setup
+---
 
-1. `cd frontend`
-2. `npm install`
-3. `npm start`
+## ✨ Key Features
 
-### 3. Project Architecture
+### 🔐 Authentication & Authorization
+- Secure signup/login using JWT authentication  
+- Role-based access control (Admin / Teacher / Student)  
+- Protected routes on both frontend and backend  
 
-**LMS Project:**
-```
-├── Backend (Node.js + Express API)
-│   ├── config/          # Database & configuration
+### 👨‍🏫 Teacher Module
+- Teacher signup and login  
+- Add students using a form  
+- Automatically send student login credentials via email  
+- View assigned students  
+
+### 👨‍🎓 Student Module
+- Student login using emailed credentials  
+- View personal profile and details  
+- Upload and update profile picture  
+- Secure access to student dashboard  
+
+### 🛠️ Admin Dashboard
+- View all registered teachers and students  
+- Delete any student from the system  
+- When a student is deleted:  
+  - A popup notification is shown on the student dashboard  
+  - The student is automatically logged out (session invalidation)  
+
+### 📩 Email Automation
+- Automatically sends login credentials to students upon creation  
+- Improves onboarding flow and system usability  
+
+---
+
+## 🧱 Tech Stack
+
+### Frontend
+- React.js (Vite)  
+- JavaScript (ES6+)  
+- HTML5, CSS3  
+- Axios  
+
+### Backend
+- Node.js  
+- Express.js  
+- MongoDB (Mongoose)  
+- JWT Authentication  
+- Nodemailer (Email Service)  
+
+### Tools
+- Git & GitHub  
+- Postman  
+- VS Code  
+
+---
+
+## 🗂️ Project Architecture
+
+```text
+├── Backend (Node.js + Express)
+│   ├── config/          # Database & environment configuration
 │   ├── controllers/     # Business logic
-│   ├── middleware/      # Authentication, Authorization, Error handling
-│   ├── models/          # Database schemas (MongoDB)
-│   ├── routes/          # API endpoints
-│   ├── uploads/         # File storage
-│   └── utils/           # Helper functions
+│   ├── middleware/      # Auth, role checks, error handling
+│   ├── models/          # MongoDB schemas
+│   ├── routes/          # REST API endpoints
+│   ├── uploads/         # File uploads (profile images)
+│   └── utils/           # Helper utilities
 │
 └── Frontend (React + Vite)
     ├── components/      # Reusable UI components
-    ├── features/        # Feature-based organization
-    ├── routes/          # Routing logic
-    └── services/        # API calls
-```
+    ├── features/        # Feature-based modules
+    ├── routes/          # Application routing
+    └── services/        # API integrations
+````
 
-### 4. Features (`features/`)
+---
 
-**Feature-Based Organization:**
-```
+## 🧩 Feature-Based Frontend Structure
+
+```text
 features/
 ├── auth/
-│   └── pages/ (Login, Signup, Home)
+│   └── pages/           # Login, Signup, Home
 ├── students/
-│   ├── components/ (StudentCard, StudentForm, StudentList)
-│   └── pages/ (StudentDashboard)
+│   ├── components/      # StudentCard, StudentForm, StudentList
+│   └── pages/           # StudentDashboard
 ├── teachers/
-│   └── pages/ (TeacherDashboard)
+│   └── pages/           # TeacherDashboard
 └── admin/
-    └── pages/ (AdminDashboard)
+    └── pages/           # AdminDashboard
 ```
 
+---
+
+## ⚙️ Getting Started (Local Setup)
+
+### 1️⃣ Backend Setup
+
+```bash
+cd backend
+npm install
+```
+
+Create a `.env` file and add:
+
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+EMAIL_USER=your_email
+EMAIL_PASS=your_email_password
+```
+
+Start the backend server:
+
+```bash
+npm start
+```
+
+---
+
+### 2️⃣ Frontend Setup
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+---
+
+## 📌 What This Project Demonstrates
+
+* End-to-end MERN stack development
+* Real-world authentication & authorization
+* Role-based dashboards
+* RESTful API design
+* Frontend–backend integration
+* Clean, scalable folder structure
+* Practical problem-solving beyond tutorials
+
+---
+
+## 👨‍💻 Author
+
+**Syed Tayyab**
+MERN Stack Developer
+
+* 📫 Email: [smtayyab110@gmail.com](mailto:smtayyab110@gmail.com)
+* 🔗 LinkedIn: [https://www.linkedin.com/in/syed-tayyab-kazmi/](https://www.linkedin.com/in/syed-tayyab-kazmi/)
+* 🐙 GitHub: [https://github.com/tayyab-balti](https://github.com/tayyab-balti)
+
+---
+
+⭐ If you find this project useful, feel free to star the repository!
+
+```
+
+---
+
+You’re doing *everything right* now — this is how real hiring prep looks 💪
+```
