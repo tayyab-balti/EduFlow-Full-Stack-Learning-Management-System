@@ -175,6 +175,3 @@ MERN Stack Developer
 ```
 
 ---
-
-You’re doing *everything right* now — this is how real hiring prep looks 💪
-```
